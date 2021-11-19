@@ -2,17 +2,16 @@ export const saveElement = details => {
     return (dispatch) => {
         dispatch({
             type: 'save',
-            details: details,
-            id: details.callingCodes
+            payload: details,
         })
     }
 }
 
-export const deleteElement = id => {
+export const deleteElement = details => {
     return (dispatch) => {
         dispatch({
             type: 'delete',
-            id: id
+            payload: parseInt(details)
         })
     }
 }

@@ -159,6 +159,10 @@ body {
   transform: scale(1.05);
 }
 
+.text {
+  color:var(--fulvous);
+}
+
 @media only screen and (max-width: 1000px) {
   .card,
   .searchbox {

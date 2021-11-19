@@ -5,7 +5,6 @@ import { Button } from 'react-bootstrap';
 
 const MyButton = ({ type, details, id }) => {
     const dispatch = useDispatch();
-    console.log('mybutton id ', id);
 
     const { saveElement, deleteElement } = bindActionCreators(actionCreators, dispatch);
 

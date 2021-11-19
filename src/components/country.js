@@ -49,7 +49,7 @@ const Countries = () => {
       {isLoaded && (
         <Container className="p-2">
             <div className="input-group">
-                <span class="input-group-text my-2 p-2">🔍</span>
+                <span className="input-group-text my-2 p-2">🔍</span>
                 <Form.Control
                     type="text"
                     placeholder=" search"
@@ -75,8 +75,8 @@ const Countries = () => {
 
             <Container className="p-0">
                 <Row className="align-items-center justify-content-center">
-                    {searchResults.map((item) => (
-                        <CountryCard country={item} type='save' />
+                    {searchResults.map((item, index) => (
+                        <CountryCard country={item} type='save' key={index} />
                     ))}
                 </Row>
             </Container>
