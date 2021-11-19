@@ -1,38 +1,191 @@
-.App {
-  text-align: center;
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300&display=swap");
+@import url("https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css");
+
+:root {
+  --snow: #fbf5f3;
+  --fulvous: #e28413;
+  --oxford_blue: #000022;
+  --rusty_red: #de3c4b;
+  --french-raspberry: #c42847;
+
+  --tart_orange: #ff3c38;
+  --usafa_blue: #004e89;
+  --cadet_grey: #9eb3c2;
+
+  --transition_time: 0.2s;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body {
+  background-color: var(--cadet_grey);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.main,
+.main__wrapper,
+.country_details {
+  max-width: 80vw;
+  margin: 0 auto;
+  transition: all var(--transition_time) ease;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.navbar {
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  border-bottom: 1px solid var(--usafa_blue);
+}
+.navbar h1 {
+  color: var(--usafa_blue);
+}
+.navbar .links {
+  margin-left: auto;
+}
+.navbar a {
+  margin-left: 16px;
+  text-decoration: none;
+  padding: 6px;
+  color: var(--usafa_blue);
+}
+.navbar a:hover {
+  color: var(--fulvous);
+}
+
+.card,
+.searchbox {
+  font-family: "Roboto Mono", monospace;
+  font-weight: 700;
+}
+
+.response__wrapper {
+  border-color: var(--usafa_blue);
+}
+
+.heading {
+  background-color: var(--usafa_blue);
+  color: var(--snow);
+  transition: all var(--transition_time) ease;
+}
+
+.heading:hover {
+  cursor: pointer;
+  color: var(--tart_orange);
+}
+
+.heading__text {
+  padding: 0.75rem 0.5rem;
+}
+
+.ascending::after {
+  content: "⬇";
+  display: inline-block;
+  margin-left: 1em;
+}
+
+.descending::after {
+  content: "⬆";
+  display: inline-block;
+  margin-left: 1em;
+}
+
+.card-grid {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.card-grid a {
+  text-decoration: none;
+  color: var(--oxford_blue);
+  flex-basis: 100%;
+}
+
+.card__content {
+  transition: all var(--transition_time) ease;
+}
+
+.card-grid a:nth-of-type(2n + 1) {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.card__content:hover {
+  color: var(--usafa_blue);
+  background-color: var(--cadet_grey);
+}
+
+.card__content p {
+  margin-bottom: 0;
+  padding: 0.5rem;
+}
+
+.details__wrapper {
   display: flex;
   flex-direction: column;
+}
+
+.country_details {
+  border: var(--usafa_blue);
+  flex-basis: 100%;
+}
+
+.country_details p {
+  margin: 0;
+  padding: 0.5rem;
+  background-color: var(--usafa_blue);
+  color: var(--cadet_grey);
+}
+
+.country_details p span {
+  color: var(--snow);
+}
+
+.button__back {
+  width: 7.5vw;
+  height: 3.75vh;
+  font-size: 2rem;
+  display: flex;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  background-color: var(--usafa_blue);
+  color: var(--cadet_grey);
+  border: var(--cadet_grey);
+  transition: all var(--transition_time) ease;
+  margin: 2rem auto;
 }
 
-.App-link {
-  color: #61dafb;
+.button__back:hover {
+  color: var(--tart_orange);
+  background-color: var(--usafa_blue);
+  transform: scale(1.05);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.text {
+  color:var(--fulvous);
+}
+
+@media only screen and (max-width: 1000px) {
+  .card,
+  .searchbox {
+    font-size: 0.75rem;
   }
-  to {
-    transform: rotate(360deg);
+
+  .main,
+  .main__wrapper,
+  .country_details {
+    max-width: 90vw;
+  }
+
+  .button__back {
+    min-width: 40px;
+    width: 25vw;
+    height: 10vh;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .main,
+  .main__wrapper,
+  .country_details {
+    max-width: 95vw;
   }
 }
