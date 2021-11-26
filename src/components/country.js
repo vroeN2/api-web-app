@@ -11,11 +11,40 @@ const Countries = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState();
 
+  // useEffect(() => {
+  //   let initial_url = "https://restcountries.com/v3.1/name/";
+  //   let url = initial_url + searchTerm;
+  //   fetch(+url)
+  //     .then((res) => res.json())
+  //     .then(
+  //       (result) => {
+  //         setItems(result);
+  //         setIsLoaded(true);
+  //       },
+  //       (error) => {
+  //         setError(error);
+  //         setIsLoaded(true);
+  //       }
+  //     );
+  // }, [searchTerm]);
+
+
   useEffect(() => {
-    fetch("https://restcountries.com/v2/all")
+    if (searchTerm === "" || searchTerm === null) {
+      setItems([]);
+      setIsLoaded(true);
+    } else {
+      let initial_url = `https://restcountries.com/v3.1/name/`;
+      let url = initial_url + searchTerm;
+      fetch(url)
       .then((res) => res.json())
       .then(
         (result) => {
+          console.log('typ:', result.typeof)
+          console.log('results for: \'', searchTerm, '\'', result.map(
+            country => {
+              console.log('kraj: ', country.name.official);
+          }));
           setItems(result);
           setIsLoaded(true);
         },
@@ -24,14 +53,59 @@ const Countries = () => {
           setIsLoaded(true);
         }
       );
-  }, []);
+    }
+  }, [searchTerm]);
+
+
+
+  // useEffect(() => {
+  //   if (searchTerm === "" || searchTerm === null) {
+  //     console.log('jest pusto');
+  //     setItems([]);
+  //     setIsLoaded(true);
+  //   } else {
+  //     const fecthPosts = async () => {
+  //       let initial_url = `https://restcountries.com/v3.1/name/` 
+  //       let url = initial_url + searchTerm;
+  //       console.log('current url:', url);
+        
+  //       const res = await fetch(url);
+  //       const {result} = await res.json();
+
+  //       setItems(result);
+  //       setIsLoaded(true);
+  //       fecthPosts();
+  //     }
+  //   }
+  // }, [searchTerm]);
+
+
+
+
+
+
+
+
+
+
+  // if (pathArray.toLowerCase().indexOf("blah") != -1{}
+  // pathArray.map(function(s) { return s.toLowerCase(); }).indexOf('blah') !== -1
+
+
+
+
+
+
+
+
+
 
   const { data, requestSort, getClassNamesFor } = useSortableData(items);
 
   useEffect(() => {
     const result = [];
     for (let i of data) {
-      if (i.name.toLowerCase().includes(searchTerm.toLocaleLowerCase())) {
+      if (i.name.official.toLowerCase().includes(searchTerm.toLocaleLowerCase())) {
         result.push(i);
       }
     }
@@ -52,7 +126,7 @@ const Countries = () => {
                 <span className="input-group-text my-2 p-2">🔍</span>
                 <Form.Control
                     type="text"
-                    placeholder=" search"
+                    placeholder="start typing to see the results"
                     value={searchTerm}
                     onChange={(e) => handleChange(e)}
                     className="searchbox mt-2 mb-2 p-2"
@@ -75,7 +149,7 @@ const Countries = () => {
 
             <Container className="p-0">
                 <Row className="align-items-center justify-content-center">
-                    {searchResults.map((item, index) => (
+                    {searchResults && searchResults.map((item, index) => (
                         <CountryCard country={item} type='save' key={index} />
                     ))}
                 </Row>

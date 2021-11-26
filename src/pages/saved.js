@@ -13,7 +13,6 @@ const Saved = () => {
         <Row className="align-items-center justify-content-center">
           {state.saved.map((item, index) => (
             <CountryCard country={item.details} type="delete" id={item.id} key={index} />
-            // console.log('przekazane id do usuniecia: ', item.id)
           ))}
         </Row>
       </Container>
