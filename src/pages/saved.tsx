@@ -7,7 +7,7 @@ const Saved = () => {
 
   const state = useSelector((state) => state);
 
-  if (state.saved.length > 0) {
+  if (state.length > 0) {
     return (
       <Container className="p-0">
         <Row className="align-items-center justify-content-center">
