@@ -1,12 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import components from ".";
 import { Container, Form, Row } from "react-bootstrap";
 
 const Countries = () => {
   const { CountryCard } = components;
 
-  const [isPending, setIsPending] = useState(true);
+  const firstUpdate = useRef(true);
 
+  const [isPending, setIsPending] = useState(true);
   const [error, setError] = useState(null);
   const [items, setItems] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
@@ -14,6 +15,10 @@ const Countries = () => {
 
 
   useEffect(() => {
+    if (firstUpdate.current) {
+      firstUpdate.current = false;
+      return
+    };
     setIsPending(true);
     const abortCont = new AbortController();
 
@@ -40,6 +45,7 @@ const Countries = () => {
                 setError(err.message);
             }
         })
+
     return () => abortCont.abort();
   }, [searchTerm])
 
