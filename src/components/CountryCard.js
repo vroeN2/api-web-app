@@ -9,7 +9,7 @@ const CountryCard = ({ country, type, id = 0 }) => {
             <div className="card p-2 m-2 text-center" key={country.callingCodes}>
                 <Image src={country.flags.svg} fluid />
 
-                <div className="lead my-2">{country.name}</div>
+                <div className="lead my-2">{country.name.official}</div>
 
                 <MyButton type={type} id={id} details={country}>{type}</MyButton>
             </div>

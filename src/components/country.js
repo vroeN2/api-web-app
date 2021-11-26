@@ -3,7 +3,7 @@ import components from ".";
 import { Container, Form, Row } from "react-bootstrap";
 
 const Countries = () => {
-  const { useSortableData, CountryCard } = components;
+  const { CountryCard } = components;
 
   const [isPending, setIsPending] = useState(true);
 
@@ -12,7 +12,9 @@ const Countries = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState();
 
+
   useEffect(() => {
+    setIsPending(true);
     const abortCont = new AbortController();
 
     let initial_url = `https://restcountries.com/v3.1/name/`;
@@ -38,21 +40,20 @@ const Countries = () => {
                 setError(err.message);
             }
         })
-
     return () => abortCont.abort();
   }, [searchTerm])
 
-  const { data, requestSort, getClassNamesFor } = useSortableData(items);
-
   useEffect(() => {
+    setIsPending(true);
     const result = [];
-    for (let i of data) {
+    for (let i of items) {
       if (i.name.official.toLowerCase().includes(searchTerm.toLowerCase())) {
         result.push(i);
       }
     }
     setSearchResults(result);
-  }, [searchTerm, data]);
+    setIsPending(false);
+  }, [items]);
 
   const handleChange = (e) => {
     setSearchTerm(e.target.value);
@@ -74,27 +75,21 @@ const Countries = () => {
             
             <div className="response__wrapper">
               <Container className="p-0">
-                <div
-                  onClick={() => requestSort("name")}
-                  className="heading"
-                  xs={4}
-                >
-                  <div className={"heading__text text-center display-3 " + getClassNamesFor("name")}>
-                    Countries
-                  </div>
+                <div className="heading">
+                  <div className="heading__text text-center display-3">Countries</div>
                 </div>
               </Container>
           
-              { isPending && <p>loading...</p> }
+              { isPending && <p className='lead p-4'>loading...</p> }
 
-              { error && <h2 className='text-center mt-5'>{error}</h2> }
+              { ! isPending && error && <h2 className='text-center mt-5'>{error}</h2> }
 
               { !isPending && 
                   <Container className="p-0">
                       <Row className="align-items-center justify-content-center">
-                        { searchResults && searchResults.map((item, index) => {
+                        { !error && searchResults.map((item, index) => (
                             <CountryCard country={item} type='save' key={index} />
-                          }) }
+                        )) }
                       </Row>
                   </Container>
               }

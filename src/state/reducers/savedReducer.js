@@ -2,7 +2,7 @@ const savedReducer = ( state = [], action) => {
     switch (action.type) {
         case 'save':
             const newItem = {
-                id: parseInt(action.payload.callingCodes[0]),
+                id: parseInt(action.payload.area),
                 details: action.payload
             };
             return state = [ ...state, newItem];
