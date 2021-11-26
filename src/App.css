@@ -68,7 +68,6 @@ body {
 }
 
 .heading:hover {
-  cursor: pointer;
   color: var(--tart_orange);
 }
 
